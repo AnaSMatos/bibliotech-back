@@ -41,9 +41,16 @@ CREATE TABLE "usuarios"(
 );
 ALTER TABLE
     "usuarios" ADD PRIMARY KEY("id");
+CREATE TABLE "sessoes"(
+    "id" SERIAL NOT NULL,
+    "token" UUID NOT NULL,
+    "user_id" BIGINT NOT NULL
+);
 ALTER TABLE
-    "emprestimos" ADD CONSTRAINT "emprestimos_id_item_foreign" FOREIGN KEY("id_item") REFERENCES "livros"("ISBN");
+    "sessoes" ADD PRIMARY KEY("id");    
 ALTER TABLE
-    "emprestimos" ADD CONSTRAINT "emprestimos_id_item_foreign" FOREIGN KEY("id_item") REFERENCES "materiais_didaticos"("id");
+    "emprestimos" ADD CONSTRAINT "emprestimos_id_item_livro" FOREIGN KEY("id_item") REFERENCES "livros"("ISBN");
+ALTER TABLE
+    "emprestimos" ADD CONSTRAINT "emprestimos_id_item_material" FOREIGN KEY("id_item") REFERENCES "materiais_didaticos"("id");
 ALTER TABLE
     "emprestimos" ADD CONSTRAINT "emprestimos_id_usuario_foreign" FOREIGN KEY("id_usuario") REFERENCES "usuarios"("id");

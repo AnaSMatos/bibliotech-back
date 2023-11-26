@@ -1,0 +1,6 @@
+Regras de negócio para construção do backend:
+
+-> Apenas administradores têm permissão para realizar ações de cadastramento e modificação dos usuários.
+-> Chefes de laboratório podem gerenciar (inserir, remover, atualizar informações, mudar o status do empréstimo, etc) 
+os recursos (livros e materiais)
+-> Cargos: Administrador, Chefe de Laboratório, Aluno
