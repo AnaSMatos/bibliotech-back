@@ -5,9 +5,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "create-db": "psql -U postgres -f src/database-config/create_database.sql",
+    "create-tables": "psql -U postgres -f src/database-config/create_tables.sql -d trabalho_bd",
+    "seed-data": "psql -U postgres -f src/database-config/seed_data.sql -d trabalho_bd",
+    "reset-db": "npm run create-db && npm run create-tables && npm run seed-data"
   },
   "keywords": [],
   "author": "",

@@ -1,3 +1,5 @@
+\c trabalho_bd
+
 CREATE TABLE "livros"(
     "ISBN" SERIAL NOT NULL,
     "titulo" TEXT NOT NULL,
@@ -35,7 +37,7 @@ CREATE TABLE "usuarios"(
     "nome" TEXT NOT NULL,
     "sobrenome" TEXT NOT NULL,
     "funcao" TEXT NOT NULL,
-    "login" UUID NOT NULL,
+    "login" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "uri_foto" TEXT NOT NULL
 );
@@ -43,7 +45,7 @@ ALTER TABLE
     "usuarios" ADD PRIMARY KEY("id");
 CREATE TABLE "sessoes"(
     "id" SERIAL NOT NULL,
-    "token" UUID NOT NULL,
+    "token" TEXT NOT NULL,
     "user_id" BIGINT NOT NULL
 );
 ALTER TABLE
