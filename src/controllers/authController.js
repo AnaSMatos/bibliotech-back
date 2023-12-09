@@ -28,7 +28,9 @@ export async function signIn(req, res){
             const isMatch = await bcrypt.compare(senha, user.rows[0].senha);
             if(isMatch){
                 await db.query(`INSERT INTO sessoes (token, user_id) VALUES ($1, $2)`, [token, user.rows[0].id]);
-                return res.send(token).status(200);
+                const userData = user.rows[0]
+                const parsedData = {id:userData.id, nome:userData.nome, sobrenome: userData.sobrenome, funcao: userData.funcao, foto: userData.uri_foto}
+                return res.send({...parsedData, token}).status(200);
             }else{
                 return res.sendStatus(401);
             }
