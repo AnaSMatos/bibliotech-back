@@ -85,7 +85,7 @@ export async function updateMaterial(req, res){
 }
 
 export async function deleteMaterial(req, res){
-    const {id} = req.body
+    const {id} = req.query
     const {token} = res.locals
     try{
         const userRole = await getUserRole(token)

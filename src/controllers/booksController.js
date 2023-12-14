@@ -84,7 +84,7 @@ export async function updateBook(req, res){
 }
 
 export async function deleteBook(req, res){
-    const {isbn} = req.body
+    const {isbn} = req.query
     const {token} = res.locals
     try{
         const userRole = await getUserRole(token)
