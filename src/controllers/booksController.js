@@ -89,7 +89,7 @@ export async function deleteBook(req, res){
     try{
         const userRole = await getUserRole(token)
 
-        if(userRole != 'Chefe de laboratorio'){
+        if(userRole != 'Chefe de Laboratorio'){
             return res.sendStatus(401)
         }
 

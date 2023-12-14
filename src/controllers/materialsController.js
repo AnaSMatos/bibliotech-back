@@ -90,7 +90,9 @@ export async function deleteMaterial(req, res){
     try{
         const userRole = await getUserRole(token)
 
-        if(userRole != 'Chefe de laboratorio'){
+        console.log(userRole)
+
+        if(userRole != 'Chefe de Laboratorio'){
             return res.sendStatus(401)
         }
 
