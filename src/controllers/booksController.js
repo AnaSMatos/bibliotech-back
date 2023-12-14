@@ -57,7 +57,7 @@ export async function getBooks(req, res) {
 
 export async function updateBook(req, res){
     const { 
-        isbn, titulo, autor, descricao, 
+        ISBN, titulo, autor, descricao, 
         categoria, data_aquisicao, estado_conservacao, 
         localizacao_fisica, uri_capa 
     } = req.body;
@@ -75,7 +75,7 @@ export async function updateBook(req, res){
         localizacao_fisica, uri_capa) = ($1, $2, $3, $4, $5, $6, $7, $8)
         WHERE "ISBN" = $9
         `, [titulo, autor, descricao, categoria, 
-            data_aquisicao, estado_conservacao, localizacao_fisica, uri_capa, isbn ]);
+            data_aquisicao, estado_conservacao, localizacao_fisica, uri_capa, ISBN ]);
         res.sendStatus(200);
     }catch(err){
         console.log(err);
