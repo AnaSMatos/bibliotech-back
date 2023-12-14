@@ -70,10 +70,10 @@ export async function updateMaterial(req, res){
 
         await db.query(`
         UPDATE materiais_didaticos
-        SET descricao, categoria, numero_serie, 
+        SET (descricao, categoria, numero_serie, 
         data_aquisicao, estado_conservacao, 
-        localizacao_fisica, uri_foto = $1, $2, $3, $4, $5, $6, $7, $8
-        WHERE id = $9
+        localizacao_fisica, uri_foto) = ($1, $2, $3, $4, $5, $6, $7)
+        WHERE id = $8
         `, [descricao, categoria, numero_serie, 
             data_aquisicao, estado_conservacao, 
             localizacao_fisica, uri_foto, id ]);
