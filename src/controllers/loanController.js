@@ -80,7 +80,7 @@ export async function getLoansByUser(req, res){
         LEFT JOIN materiais_didaticos m ON e.id_material_didatico = m.id AND e.tipo_item = 'material_didatico'
         WHERE e.id = $1
     `, [id]);
-        res.send(loans.rows[0]).status(200)
+        res.send(loans.rows).status(200)
     }catch(err){
         console.log(err)
         res.sendStatus(500)
