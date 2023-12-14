@@ -56,3 +56,17 @@ export async function returnItem(req, res){
         res.sendStatus(500)
     }
 }
+
+export async function getLoansByUser(req, res){
+    try{
+        const {id} = req.query
+        const loans = await db.query(`
+            SELECT * FROM emprestimos
+            WHERE id = $1
+        `, [id])
+        res.send(loans.rows[0]).status(200)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+} 
