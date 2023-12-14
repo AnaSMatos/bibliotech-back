@@ -11,7 +11,7 @@ export async function registerBook(req, res) {
     try{
         const userRole = await getUserRole(token)
 
-        if(userRole != 'Chefe de laboratorio'){
+        if(userRole != 'Chefe de Laboratorio'){
             return res.sendStatus(401)
         }
 
@@ -65,7 +65,7 @@ export async function updateBook(req, res){
     try{
         const userRole = await getUserRole(token)
 
-        if(userRole != 'Chefe de laboratorio'){
+        if(userRole != 'Chefe de Laboratorio'){
             return res.sendStatus(401)
         }
 
