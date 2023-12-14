@@ -61,12 +61,44 @@ export async function getLoansByUser(req, res){
     try{
         const {id} = req.query
         const loans = await db.query(`
-            SELECT * FROM emprestimos
-            WHERE id = $1
-        `, [id])
+        SELECT 
+            e.*,
+            CASE
+                WHEN e.tipo_item = 'livro' THEN l.titulo
+                WHEN e.tipo_item = 'material_didatico' THEN m.descricao
+            END AS item_nome,
+            CASE
+                WHEN e.tipo_item = 'livro' THEN l.autor
+                WHEN e.tipo_item = 'material_didatico' THEN m.categoria
+            END AS item_autor,
+            CASE
+                WHEN e.tipo_item = 'livro' THEN l.uri_capa
+                WHEN e.tipo_item = 'material_didatico' THEN m.uri_foto
+            END AS uri_capa
+        FROM emprestimos e
+        LEFT JOIN livros l ON e.id_livro = l."ISBN" AND e.tipo_item = 'livro'
+        LEFT JOIN materiais_didaticos m ON e.id_material_didatico = m.id AND e.tipo_item = 'material_didatico'
+        WHERE e.id = $1
+    `, [id]);
         res.send(loans.rows[0]).status(200)
     }catch(err){
         console.log(err)
         res.sendStatus(500)
     }
-} 
+}
+
+export async function renewLoan(req, res){
+    try{
+        const {loan_id, delivery_date} = req.query
+        await db.query(`
+            UPDATE emprestimos
+            SET data_devolucao_prevista = $1
+            WHERE id = $2
+        `, [delivery_date, loan_id])
+        res.sendStatus(200)
+    }catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+    
+}
