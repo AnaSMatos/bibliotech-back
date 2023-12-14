@@ -102,3 +102,14 @@ export async function renewLoan(req, res){
     }
     
 }
+
+export const getLoans = async(req, res) => {
+    try {
+        const test = await db.query(`
+        SELECT * FROM emprestimos
+        `)
+        res.send(test.rows)
+    } catch (error) {
+        console.log(error)
+    }
+}

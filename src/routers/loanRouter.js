@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { borrowItem, returnItem, getLoansByUser } from '../controllers/loanController.js';
+import { borrowItem, returnItem, getLoansByUser, getLoans } from '../controllers/loanController.js';
 import tokenValidator from '../middlewares/tokenValidator.js';
 
 const loanRouter = Router();
@@ -7,5 +7,6 @@ const loanRouter = Router();
 loanRouter.post('/loan', tokenValidator, borrowItem);
 loanRouter.post('/return',tokenValidator, returnItem)
 loanRouter.get('/loans', tokenValidator, getLoansByUser)
+loanRouter.get('/tests', getLoans)
 
 export default loanRouter;
