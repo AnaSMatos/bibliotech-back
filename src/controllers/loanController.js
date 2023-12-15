@@ -65,19 +65,19 @@ export async function getLoansByUser(req, res){
             e.*,
             CASE
                 WHEN e.tipo_item = 'livro' THEN l.titulo
-                WHEN e.tipo_item = 'material_didatico' THEN m.descricao
+                WHEN e.tipo_item = 'material' THEN m.descricao
             END AS item_nome,
             CASE
                 WHEN e.tipo_item = 'livro' THEN l.autor
-                WHEN e.tipo_item = 'material_didatico' THEN m.categoria
+                WHEN e.tipo_item = 'material' THEN m.categoria
             END AS item_autor,
             CASE
                 WHEN e.tipo_item = 'livro' THEN l.uri_capa
-                WHEN e.tipo_item = 'material_didatico' THEN m.uri_foto
+                WHEN e.tipo_item = 'material' THEN m.uri_foto
             END AS uri_capa
         FROM emprestimos e
         LEFT JOIN livros l ON e.id_livro = l."ISBN" AND e.tipo_item = 'livro'
-        LEFT JOIN materiais_didaticos m ON e.id_material_didatico = m.id AND e.tipo_item = 'material_didatico'
+        LEFT JOIN materiais_didaticos m ON e.id_material_didatico = m.id AND e.tipo_item = 'material'
         WHERE e.id_usuario = $1
     `, [id]);
         res.send(loans.rows).status(200)
