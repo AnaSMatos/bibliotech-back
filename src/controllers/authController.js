@@ -58,8 +58,7 @@ export async function editUser(req, res){
     try{
         await db.query(`
         UPDATE usuarios 
-        SET (nome, sobrenome, login, funcao, uri_foto) 
-	    VALUES ($1, $2, $3, $4, $5)
+        SET (nome, sobrenome, login, funcao, uri_foto) = ($1, $2, $3, $4, $5)
         WHERE id = $6`, [nome, sobrenome, login, funcao, uri_foto, id])
         ;
         res.sendStatus(200)
