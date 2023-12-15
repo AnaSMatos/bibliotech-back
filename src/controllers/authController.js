@@ -54,12 +54,14 @@ export async function deleteUser(req, res){
 }
 
 export async function editUser(req, res){
-    const { nome, sobrenome, login, funcao, uri_foto } = req.body
+    const { id, nome, sobrenome, login, funcao, uri_foto } = req.body
     try{
         await db.query(`
         UPDATE usuarios 
         SET (nome, sobrenome, login, funcao, uri_foto) 
-	    VALUES ($1, $2, $3, $4, $5)`, [nome, sobrenome, login, funcao, uri_foto]);
+	    VALUES ($1, $2, $3, $4, $5)
+        WHERE id = $6`, [nome, sobrenome, login, funcao, uri_foto, id])
+        ;
         res.sendStatus(200)
     }catch(err){
         console.log(err);
