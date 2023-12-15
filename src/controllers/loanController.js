@@ -89,7 +89,7 @@ export async function getLoansByUser(req, res){
 
 export async function renewLoan(req, res){
     try{
-        const {loan_id, delivery_date} = req.query
+        const {loan_id, delivery_date} = req.body
         await db.query(`
             UPDATE emprestimos
             SET data_devolucao_prevista = $1
@@ -101,15 +101,4 @@ export async function renewLoan(req, res){
         res.sendStatus(500)
     }
     
-}
-
-export const getLoans = async(req, res) => {
-    try {
-        const test = await db.query(`
-        SELECT * FROM emprestimos
-        `)
-        res.send(test.rows)
-    } catch (error) {
-        console.log(error)
-    }
 }
