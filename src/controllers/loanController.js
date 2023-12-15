@@ -78,7 +78,7 @@ export async function getLoansByUser(req, res){
         FROM emprestimos e
         LEFT JOIN livros l ON e.id_livro = l."ISBN" AND e.tipo_item = 'livro'
         LEFT JOIN materiais_didaticos m ON e.id_material_didatico = m.id AND e.tipo_item = 'material_didatico'
-        WHERE e.id = $1
+        WHERE e.id_usuario = $1
     `, [id]);
         res.send(loans.rows).status(200)
     }catch(err){
