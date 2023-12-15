@@ -70,7 +70,7 @@ export async function editUser(req, res){
 export async function getUsers(req, res){
     try{
         const users = await db.query(`
-            SELECT nome, sobrenome, login, funcao, uri_foto FROM usuarios
+            SELECT id, nome, sobrenome, login, funcao, uri_foto FROM usuarios
         `)
         res.send(users.rows).status(200)
     }catch(err){
