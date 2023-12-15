@@ -39,3 +39,42 @@ export async function signIn(req, res){
         res.sendStatus(500);
     }
 }
+
+export async function deleteUser(req, res){
+    const {id} = req.query
+    try{
+        await db.query(`
+            DELETE FROM usuarios WHERE id = $1
+        `, [id])
+        res.sendStatus(200)
+    }catch(err){
+        console.log(err);
+        res.sendStatus(500)
+    }
+}
+
+export async function editUser(req, res){
+    const { nome, sobrenome, login, funcao, uri_foto } = req.body
+    try{
+        await db.query(`
+        UPDATE usuarios 
+        SET (nome, sobrenome, login, funcao, uri_foto) 
+	    VALUES ($1, $2, $3, $4, $5)`, [nome, sobrenome, login, funcao, uri_foto]);
+        res.sendStatus(200)
+    }catch(err){
+        console.log(err);
+        res.sendStatus(500)
+    }
+}
+
+export async function getUsers(req, res){
+    try{
+        const users = await db.query(`
+            SELECT nome, sobrenome, login, funcao, uri_foto FROM usuarios
+        `)
+        res.send(users.rows).status(200)
+    }catch(err){
+        console.log(err);
+        res.sendStatus(500)
+    }
+}
